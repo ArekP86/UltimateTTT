@@ -17,9 +17,6 @@ import java.util.Optional;
 public class UltimateTTT extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(UltimateTTT.class.getResource("game_v4.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        System.out.println("UltimateTTT CTOR");
         Group root = new Group();
         Game g = new Game();
         root.getChildren().add(g);

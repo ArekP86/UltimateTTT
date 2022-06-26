@@ -6,38 +6,45 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class History extends TableView {
-    TableView<HistoryEntry> table = new TableView<HistoryEntry>();
-    ObservableList<HistoryEntry> data = FXCollections.observableArrayList();
+    ObservableList<HistoryEntry> data = FXCollections.observableArrayList(new HistoryEntry("Round start", "", ""));
 
     private int currentTurn = 1;
 
     public History() {
-        clear();
-        TableColumn MoveCol = new TableColumn("Move");
-        MoveCol.setCellValueFactory(new PropertyValueFactory<>("Move"));
-        TableColumn playerCol = new TableColumn("Player");
-        playerCol.setCellValueFactory(new PropertyValueFactory("Player"));
-        TableColumn locationCol = new TableColumn("Location");
-        locationCol.setCellValueFactory(new PropertyValueFactory("Location"));
-        table.getColumns().addAll(MoveCol, playerCol, locationCol);
+        TableColumn<HistoryEntry, String> moveCol = new TableColumn("Move");
+        moveCol.setCellValueFactory(
+                new PropertyValueFactory<>("Move"));
+        TableColumn<HistoryEntry, String>  playerCol = new TableColumn("Player");
+        playerCol.setCellValueFactory(
+                new PropertyValueFactory<>("Player"));
+        TableColumn<HistoryEntry, String>  locationCol = new TableColumn("Location");
+        locationCol.setCellValueFactory(
+                new PropertyValueFactory<>("Location"));
+        getColumns().add(moveCol);
+        getColumns().add(playerCol);
+        getColumns().add(locationCol);
+        getItems().add(new HistoryEntry("Round start", " ", " "));
+//        clear();
+        refresh();
     }
 
     public void clear() {
-        data.clear();
         currentTurn = 1;
         HistoryEntry initialEntry = new HistoryEntry("Round Starts", "", "");
-        data.add(initialEntry);
+        getItems().clear();
+        getItems().add(initialEntry);
+        refresh();
 
-        table.setItems(data);
     }
 
     public void addEntry(Game.Turn turn, Game.Field boardField, Game.Field field) {
 
-        HistoryEntry newEntry = new HistoryEntry(String.valueOf(currentTurn++), turn.toString(), boardField.toString() + " : " + field.toString());
-        data.add(newEntry);
-
-        table.setItems(data);
+        getItems().add(new HistoryEntry(String.valueOf(currentTurn++), turn.toString(), boardField.toString() + " : " + field.toString()));
+        refresh();
     }
 }

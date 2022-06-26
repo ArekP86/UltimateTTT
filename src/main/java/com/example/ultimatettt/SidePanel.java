@@ -16,7 +16,6 @@ public class SidePanel extends VBox {
 
 
     public SidePanel(History history, Button newGameButton) {
-        System.out.println("SidePanel CTOR");
         GridPane header = new GridPane();
 
         header.addRow(0, new Label("Round started by: "), startingMoveLabel, new Label("Current player: "), currentMoveLabel);

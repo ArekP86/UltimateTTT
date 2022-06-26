@@ -5,7 +5,9 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class OXBoard extends StackPane {
@@ -23,7 +25,11 @@ public class OXBoard extends StackPane {
         this.ultimateBoard = ultimateBoard;
         this.field = field;
         int fieldInt = 0;
+
+        oxBoard.setGridLinesVisible(true);
         for (int x = 0; x < 3; x++) {
+            oxBoard.getColumnConstraints().add(new ColumnConstraints(80));
+            oxBoard.getRowConstraints().add(new RowConstraints(80));
             for (int y = 0; y < 3; y++) {
                 oxButton[x][y] = new OXButton(this, Game.Field.values()[fieldInt++]);
                 GridPane.setConstraints(oxButton[x][y], x, y);
@@ -44,6 +50,9 @@ public class OXBoard extends StackPane {
             }
         });
         valueImage.setVisible(false);
+
+
+        getChildren().addAll(oxBoard, valueImage);
     }
 
     public void setActive() {

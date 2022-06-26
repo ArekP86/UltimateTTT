@@ -9,6 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+
 public class OXButton extends Button {
     Game.Field field;
     boolean empty = true;
@@ -19,24 +23,26 @@ public class OXButton extends Button {
     private boolean active = true;
 
     public OXButton(OXBoard oxBoard, Game.Field field) {
+        System.out.println("OXButton CTOR");
         this.id = lastId++;
         this.oxBoard = oxBoard;
         this.field = field;
+
+        setPrefSize(80,80);
 
         setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 {
                     if (empty && active) {
-                        Image image;
-                        if(oxBoard.getCurrentMove() == Game.Turn.o) {
-                            image = new Image("O_70px.png");
+                        value = oxBoard.getCurrentMove();
+                        if(value == Game.Turn.o) {
+                            ImageView iv = new ImageView(new Image("O_70px.png"));
+                            setGraphic(iv);
                         } else {
-                            image = new Image("X_70px.png");
+                            ImageView iv = new ImageView(new Image("X_70px.png"));
+                            setGraphic(iv);
                         }
-                        ImageView iv = new ImageView(image);
-                        setGraphic(iv);
-
                         empty = false;
                         oxBoard.moveMade(field);
                     }

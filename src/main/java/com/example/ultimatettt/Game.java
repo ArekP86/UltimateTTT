@@ -18,7 +18,6 @@ public class Game extends BorderPane {
     SidePanel sidePanel = new SidePanel(history, anotherRoundButton);
 
     public Game() {
-        System.out.println("GAME CTOR");
         starts = Turn.o;
         currentMove = starts;
         sidePanel.setStartingMove(starts);
@@ -35,7 +34,7 @@ public class Game extends BorderPane {
                 anotherRoundButton.setVisible(false);
             }
         });
-        System.out.println("GAME CTOR END");
+        anotherRoundButton.setVisible(false);
     }
 
     private void newRound() {

@@ -1,6 +1,8 @@
 package com.example.ultimatettt;
 
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 
 public class UltimateBoard extends GridPane {
@@ -10,9 +12,12 @@ public class UltimateBoard extends GridPane {
 
     public UltimateBoard(Game game) {
 
+        setGridLinesVisible(true);
         this.game = game;
         int fieldInt = 0;
         for (int x = 0; x < 3; x++) {
+            getColumnConstraints().add(new ColumnConstraints(240));
+            getRowConstraints().add(new RowConstraints(240));
             for (int y = 0; y < 3; y++) {
                 oxBoard[x][y] = new OXBoard(this, Game.Field.values()[fieldInt++]);
                 GridPane.setConstraints(oxBoard[x][y], x, y);
